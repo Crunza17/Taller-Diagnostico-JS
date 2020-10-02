@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<!-- Ejercicio 1 -->
+	<div id="eje1" class="container border bg-light m-auto p-4 d-flex justify-content-center form-row">
+		<h1>Ejercicio 1</h1><br>
+		<div class="form-group col-md-11">
+			<input class="form-control" type="text" id="texto" placeholder="Ingrese cualquier cadena de texto">
+		</div>
+		<div class="form-group col-md-1">
+			<button class="btn btn-success ml-2" onclick="cadenaTexto();">Enviar</button><br>
+		</div>
+		<script type="text/javascript">
+			function cadenaTexto(){
+				var t1 = document.getElementById("texto").value;
+				var x = t1.length;
+				var cadenaInvertida = "";
+
+				var espacios = [];
+				for(var i = 0; i < t1.length; i++) {
+					if (t1[i].toLowerCase() === " ")espacios.push(i);
+				}
+
+				while (x >= 0) {
+				  cadenaInvertida = cadenaInvertida + t1.charAt(x);
+				  x--;
+				}
+
+				var d1 = document.getElementById("eje1");
+				d1.insertAdjacentHTML('beforeend', 'Tamaño: '+t1.length+'<br>');
+				d1.insertAdjacentHTML('beforeend', 'Espacios: '+espacios.length+'<br>');
+				d1.insertAdjacentHTML('beforeend', 'Invertido: '+cadenaInvertida+'<br>');
+			}
+		</script>
+		<div id="resultado" class=""></div>
+	</div><br>
+
+	<!-- Ejercicio 3 -->
+	<div class="container border bg-light m-auto p-4 d-flex justify-content-center form-row">
+		<h1>Ejercicio 3</h1><br>
+		<div class="form-group col-md-11">
+			<input class="form-control" type="text" name="texto" id="textoIn" placeholder="Ingrese un nombre">
+		</div>
+		<div class="form-group col-md-1">
+			<input class="btn btn-success ml-2" type="submit" name="enviar" id="botonId">
+		</div>
+
+		<ol id="listas">Lista</ol>
+
+		<script type="text/javascript">
+
+			const botonId = document.getElementById('botonId');
+			const lista = document.getElementById('listas')
+
+			let usuarios = [];
+			let existe;
+
+			botonId.addEventListener('click', () => {
+
+				const texto = document.getElementById('textoIn');
+				const textoIn = texto.value;
+
+				console.log(" usuario digitado es " + textoIn);
+
+				if (textoIn != ""){
+
+					existeUsuario(textoIn);
+					if (!existe){
+						usuarios.push(textoIn)
+					}else{
+						alert ("El usuario " + textoIn + " ya existe ");
+					}
+					
+				}else{
+					usuarios.sort();
+					pintarArray();
+					
+				}
+				texto.value="";
+
+			});
+
+			const pintarArray = () => {
+
+				for (usuario of usuarios){
+					let etiqueta = document.createElement("li");
+					etiqueta.textContent = usuario;
+					lista.appendChild(etiqueta);
+				}
+
+			};
+
+			const existeUsuario = (usuarioIn) => {
+				existe = false;
+				for (usuario of usuarios){
+					if(usuario === usuarioIn){
+						existe=true;
+					}
+				}
+			}
+		</script>
+	</div><br>
+	<div class="container m-auto p-1 ">
+		<button class="btn btn-danger btn-lg float-right" onclick="location.reload();">Limpiar</button>
+	</div>
+</body>
+</html>
